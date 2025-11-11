@@ -1,0 +1,35 @@
+name: 🚀 Cypress tests in Drupal
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup DDEV
+        uses: ddev/github-action-setup-ddev@v1
+
+      - name: Start DDEV
+        run: ddev start -y
+
+      - name: Install Composer dependencies
+        run: ddev composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Install Drupal via Drush
+        run: ddev drush site:install -y --account-pass=admin
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
