@@ -11,7 +11,7 @@ describe('template spec', () => {
   })
 
   it('Should login as admin', () => {
-    cy.login()
+    cy.loginAsAdmin()
   })
 
     it('[Responsiviness] Menu should be opened', () => {
@@ -21,7 +21,7 @@ describe('template spec', () => {
   })
 
   it('Should logout', () => {
-    cy.login()
+    cy.loginAsAdmin()
     
     cy.visit('/user/logout')
     cy.contains('input', 'Log out').click()

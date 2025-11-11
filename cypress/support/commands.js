@@ -24,9 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (username, password) => {
+Cypress.Commands.add('loginAsAdmin', () => {
   cy.visit('/user')
-  cy.get('#edit-name').type(username || 'admin')
-  cy.get('#edit-pass').type(password || 'admin')
+  cy.get('#edit-name').type('admin')
+  cy.get('#edit-pass').type('admin')
   cy.get('[data-drupal-selector="user-login-form"] > .form-actions > .button').click()
 });
